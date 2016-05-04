@@ -6,9 +6,10 @@ Simple api queries for my personal use.
 ### Static form contact
 
 Embed the following snippet in any website, static or dynamic.
+When the use submits this form, all it's elements (with a name attribute) will be forwarded to your email address with a "REPLY-TO" option of the sender.
 
 ```html
-<form method="POST" action="api.mitesh.ninja/<YOUR-EMAIL-ID@DOMAIN>/">
+<form method="POST" action="http://api.mitesh.ninja/<YOUR-EMAIL-ID@DOMAIN>/">
     <!-- This field allows the user to mention a REPLY-TO email address -->
     <!-- If it is not present, it will default to garabge -->
     <input type="email" name="senderEmail" value="DEFAULT VALUE HERE">
@@ -23,10 +24,10 @@ Embed the following snippet in any website, static or dynamic.
 
 To Do:
 
-* [ ]: Add HTTPS support
-* [ ]: Add authentication before starting to send emails
-* [ ]: Limit emails sent to 20/day to avoid spam
-* [ ]: All data stored must be securely hashed
+* [ ] Add HTTPS support
+* [ ] Add authentication before starting to send emails
+* [ ] Limit emails sent to 20/day to avoid spam
+* [ ] All data stored must be securely hashed
 
 ### Automated notifier
 
