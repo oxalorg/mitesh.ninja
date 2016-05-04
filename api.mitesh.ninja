@@ -1,0 +1,21 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name api.mitesh.ninja www.api.mitesh.ninja;
+    server_tokens off;
+
+    root /var/www/api.mitesh.ninja/public;
+    index index.html index.htm;
+
+    location /static {
+        alias /var/www/api.mitesh.ninja/public/app/static;
+        autoindex on;
+    }
+
+    location / {
+        include uwsgi_params;
+        uwsgi_pass unix:///tmp/api.mitesh.ninja.sock;
+    }
+
+    error_page 404 /404.html;
+}
