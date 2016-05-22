@@ -1,14 +1,18 @@
 import os
 import random
 import string
+import fcntl
 
+import threading
+from queue import Queue
 from flask import request, redirect, url_for, send_from_directory, send_file, render_template, flash
+import logging
 from uploads import app
 from werkzeug import secure_filename
 
 UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
-
+logging.basicConfig(level=logging.DEBUG)
 
 class UploadFileHandler:
     def __init__(self, files):
@@ -57,6 +61,7 @@ def upload_file():
     if request.method == 'POST':
         files = request.files.getlist('file[]')
         uploaded_files = UploadFileHandler(files).upload_all()
+        UploadCountHandler(len(uploaded_files))
         return render_template('show_uploaded_list.html',
                                uploaded_files=uploaded_files)
     return render_template('upload.html')
@@ -65,3 +70,36 @@ def upload_file():
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
     return send_file(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+
+
+def update_count():
+    while not q.empty():
+        with open(app.config['COUNT_FILE'], 'r+') as f:
+            fcntl.flock(f, fcntl.LOCK_EX)
+            temp_text = f.read()
+            if temp_text == '':
+                count = 0
+            else:
+                count = int(temp_text)
+            logging.debug('count = {}'.format(count))
+            f.seek(0)
+            f.truncate()
+            up_count = q.get()
+            logging.debug('q.get() count = {}'.format(up_count))
+            f.write(str(count + up_count))
+            fcntl.flock(f, fcntl.LOCK_UN)
+            q.task_done()
+
+
+q = Queue()
+
+
+class UploadCountHandler:
+    thr = None
+
+    def __init__(self, count):
+        logging.debug("Added to queue")
+        q.put(count)
+        if self.thr is None or not self.thr.is_alive():
+            self.thr = threading.Thread(target=update_count).start()
+
