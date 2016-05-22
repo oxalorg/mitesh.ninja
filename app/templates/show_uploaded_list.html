@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <ul>
+            {% for file in uploaded_files %}
+                <li><a href="{{ file }}">{{ file }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endblock %}

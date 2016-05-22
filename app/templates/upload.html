@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+<script type="text/javascript">
+        function getFileData(myFile){
+            var files = myFile.files;
+            var fList = document.getElementById('fileList');
+            for(let i = 0; i < files.length; i++){
+                var filename = files[i].name;
+                var size = '<br>Size: ' + files[i].size/1000 + ' KB';
+                fList.innerHTML += '<li>'+ filename + size +'</li>';
+            }
+        }
+</script>
+<div class="container">
+    <form action="" method=post enctype=multipart/form-data>
+        <div class="row">
+            <input type="file" name="file[]" onchange="getFileData(this);" multiple>
+            <input class="button-primary" type=submit value=Upload>
+        </div>
+    </form>
+    <div class="row">
+        <ul id="fileList">
+
+        </ul>
+    </div>
+</div>
+{% endblock %}
