@@ -19,4 +19,4 @@ class FileDetails(db.Model):
         self.views = 0
 
     def __repr__(self):
-        return '<Upload %r>' % self.username
+        return 'Details:\n{}\n{}\n{}\n{}\n{}\n{}\n'.format(self.filename, self.name, self.size, self.path, self.creation_time, self.views)

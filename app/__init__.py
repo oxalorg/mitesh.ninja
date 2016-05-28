@@ -9,4 +9,6 @@ app.secret_key = app.config['SECRET_KEY']
 db = SQLAlchemy(app)
 
 import form
-import uploads
+from app import upload
+
+app.register_blueprint(upload.views.upload)

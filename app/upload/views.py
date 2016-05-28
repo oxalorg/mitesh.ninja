@@ -6,13 +6,14 @@ import threading
 import logging
 from queue import Queue
 
-from flask import request, redirect, url_for, send_from_directory, send_file, render_template, flash
+from flask import request, redirect, url_for, send_from_directory, send_file, render_template, flash, Blueprint
 from werkzeug import secure_filename
 
-from uploads import app
-from uploads import models
+from app.upload import app
+from app.upload import models
 from app import db
 
+upload = Blueprint('upload', __name__)
 
 UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
@@ -77,7 +78,7 @@ def upload_file():
     return render_template('upload.html')
 
 
-@app.route('/uploads/<filename>')
+@app.route('/upload/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
