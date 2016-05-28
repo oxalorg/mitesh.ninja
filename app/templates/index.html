@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Mitesh Shah</title>
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='matrix.css') }}">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body onclick="randomize_matrix();">
+        <canvas id="c"></canvas>
+        <div class="strokeme" id="myName">
+            MITESH SHAH<br>
+            <a id="knowMore" href="http://computableverse.com">continue;</a>
+        </div>
+        <div class="strokeme" id="knowMore">
+            
+        </div>
+    </body>
+    <script type="text/javascript" src="{{ url_for('static', filename='matrix.js') }}"></script>
+</html>

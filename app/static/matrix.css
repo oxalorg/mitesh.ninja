@@ -1,0 +1,41 @@
+/*basic reset*/
+* {
+    margin: 0; padding: 0;
+}
+
+/*adding a black bg to the body to make things clearer*/
+body {
+    background: black;
+}
+canvas {
+    display: block;
+}
+
+#myName{
+    margin: auto;
+    padding: auto;
+    position: absolute;
+    z-index: 1;
+    top: 100px;
+    left: 100px;
+    color: white;
+    font-size: 50px;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}
+
+#knowMore{
+    text-decoration: none;
+    color: white;
+    font-size: 25px;
+    font-family: Consolas, Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
+}
+
+.strokeme
+{
+    color: white;
+    text-shadow:
+    -4px -4px 2px #000,
+     4px -4px 2px #000,
+     -4px 4px 2px #000,
+      4px 4px 2px #000;  
+}
