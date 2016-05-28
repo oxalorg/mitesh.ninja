@@ -1,3 +1,4 @@
+import json
 import os
 import random
 import string
@@ -26,6 +27,7 @@ class UploadFileHandler:
         self.uploaded_list = []
 
     def upload_all(self):
+        flag = False
         for file in self.files:
             if file:
                 filename = UploadFileHandler.generate_unique_filename(
@@ -35,14 +37,15 @@ class UploadFileHandler:
                                            filename)
                     file.save(file_path)
                     file_size = os.stat(file_path).st_size
-                    file_details = models.FileDetails(file.filename, filename, file_size, file_path)
+                    file_details = models.FileDetails(secure_filename(file.filename), filename, file_size, file_path)
                     db.session.add(file_details)
                     self.uploaded_list.append(url_for('uploaded_file',
                                                       filename=filename,
                                                       _external=True))
                 else:
-                    flash(
-                        'One or more file types is not supported. Hence not uploaded.')
+                    flag = True
+        if flag is True:
+            flash('One or more file extensions not supported.')
         db.session.commit()
         return self.uploaded_list
 
@@ -59,7 +62,11 @@ class UploadFileHandler:
 
     @staticmethod
     def get_file_extension(filename):
-        return filename.rsplit('.', 1)[1]
+        ext = os.path.splitext(filename)[1]
+        if ext.startswith('.'):
+            # splitext may contain a . separator
+            ext = ext[1:]
+        return ext
 
     @staticmethod
     def allowed_file(filename):
@@ -73,8 +80,10 @@ def upload_file():
         files = request.files.getlist('file[]')
         uploaded_files = UploadFileHandler(files).upload_all()
         # UploadCountHandler(len(uploaded_files))
-        return render_template('show_uploaded_list.html',
-                               uploaded_files=uploaded_files)
+        if len(uploaded_files) > 0:
+            return json.dumps({'files': uploaded_files, 'count': len(uploaded_files)})
+        else:
+            return json.dumps({'success': 0})
     return render_template('upload.html')
 
 
