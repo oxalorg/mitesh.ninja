@@ -1,9 +1,72 @@
 body {
     background-color: #1e2023;
     margin-top: 50px;
-    color: #25fff5;
+    color: #fff;
 }
 
 a {
-    color: #25fff5;
+    color: #fff;
+}
+
+@font-face {
+    font-family: 'NjNaruto';
+    src: url('fonts/njnaruto.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.text-center{
+    text-align: center;
+}
+
+/* Skeleton overrides */
+
+.button.button-primary,
+button.button-primary,
+input[type="submit"].button-primary,
+input[type="reset"].button-primary,
+input[type="button"].button-primary {
+  color: #000;
+  background-color: #fff;
+  border-color: #fff;
+}
+.button.button-primary:hover,
+button.button-primary:hover,
+input[type="submit"].button-primary:hover,
+input[type="reset"].button-primary:hover,
+input[type="button"].button-primary:hover,
+.button.button-primary:focus,
+button.button-primary:focus,
+input[type="submit"].button-primary:focus,
+input[type="reset"].button-primary:focus,
+input[type="button"].button-primary:focus {
+  color: #000;
+  background-color: #ddd;
+  border-color: #ddd;
+}
+
+input[type="email"],
+input[type="number"],
+input[type="search"],
+input[type="text"],
+input[type="tel"],
+input[type="url"],
+input[type="password"],
+textarea,
+select {
+    background-color: #000;
+    border: 1px solid #ddd;
+}
+
+input[type="email"]:focus,
+input[type="number"]:focus,
+input[type="search"]:focus,
+input[type="text"]:focus,
+input[type="tel"]:focus,
+input[type="url"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    border: 1px solid #ddd;
+  outline: 0;
 }
