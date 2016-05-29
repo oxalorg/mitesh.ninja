@@ -29,9 +29,9 @@
         }
         var currentNumber = 1;
         function progressiveRandomNumber(){
-            if(currentNumber > 2000)
+            if(currentNumber > 20000)
                     currentNumber = 1;
-            currentNumber += currentNumber/(Math.sqrt(currentNumber)) + currentNumber/8;
+            currentNumber += currentNumber/(Math.sqrt(currentNumber)) + currentNumber/3;
             console.log(currentNumber);
             return currentNumber;
         }
@@ -42,7 +42,15 @@
                 randomizeChangeColor();
             }, randomTime);
         }());
-        randomizeChangeColor();
+
+        function toggleInfo(){
+            var infoBox = document.getElementById('infoBox');
+            if(infoBox.style.display == 'none'){
+                infoBox.style.display = 'block';
+            } else {
+                infoBox.style.display = 'none';
+            }
+        }
 </script>
 <style>
     input[type="file"] {
@@ -54,7 +62,7 @@
 </style>
 <div class="container">
     <div class="row">
-        <h1 id="ninja-scroll-hd" style="font-family:NjNaruto">Ninja Scroll Delivery Service</h1>
+        <h1 id="ninja-scroll-hd" class="text-center" style="font-family:NjNaruto">Ninja Scroll Delivery Service</h1>
     </div>
     <div class="row .text-center">
 {#        <img src="{{ url_for('static', filename='img/shuriken.png') }}" alt="shuriken-px-art">#}
@@ -64,19 +72,31 @@
             <label style="font-family:NjNaruto">Ninja clan sign</label>
         </div>
         <div class="row">
-            <input class="u-full-width" type="password" name="password" id="pass">
+            <input class="u-full-width" type="password" name="password" id="pass" required>
         </div>
         <br>
         <div class="row">
-            <div class="six columns">
+            <div class="four columns">
                 <label class="custom-file-upload button button-primary u-full-width">
                     <input type="file" id="fileInput" name="file[]" onchange="getFileData(this);" multiple>
                      Add files
                 </label>
             </div>
-            <div class="six columns">
-                <input class="button-primary u-full-width" type=submit value=Upload>
+            <div class="four columns">
+                <input class="button-primary u-full-width" type=submit style="margin-bottom:10px"; value=Upload>
             </div>
+            <div class="four columns">
+                <input class="button-primary u-full-width" type=button value="info" style="margin-bottom:10px"; onclick="toggleInfo();event.preventDefault();">
+            </div>
+        </div>
+        <div class="row" id="infoBox" style="display:none">
+        <br>
+            <ul>
+                <li>Only 'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif' extensions are allowed.</li>
+                <li>Files should be less than 2.0 MB in size.</li>
+                <li>Images may be compressed to store space.</li>
+                <li>To get a ninja clan sign/password, contact the sensei.</li>
+            </ul>
         </div>
     </form>
     <div class="row">
