@@ -79,7 +79,6 @@ def upload_file():
     if request.method == 'POST':
         files = request.files.getlist('file[]')
         uploaded_files = UploadFileHandler(files).upload_all()
-        # UploadCountHandler(len(uploaded_files))
         if len(uploaded_files) > 0:
             return json.dumps({'files': uploaded_files, 'count': len(uploaded_files)})
         else:
@@ -90,36 +89,3 @@ def upload_file():
 @app.route('/upload/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
-
-# Get this shizz out
-
-def update_count():
-    while not q.empty():
-        with open(app.config['COUNT_FILE'], 'r+') as f:
-            fcntl.flock(f, fcntl.LOCK_EX)
-            temp_text = f.read()
-            if temp_text == '':
-                count = 0
-            else:
-                count = int(temp_text)
-            logging.debug('count = {}'.format(count))
-            f.seek(0)
-            f.truncate()
-            up_count = q.get()
-            logging.debug('q.get() count = {}'.format(up_count))
-            f.write(str(count + up_count))
-            fcntl.flock(f, fcntl.LOCK_UN)
-            q.task_done()
-
-
-q = Queue()
-
-
-class UploadCountHandler:
-    thr = None
-
-    def __init__(self, count):
-        logging.debug("Added to queue")
-        q.put(count)
-        if self.thr is None or not self.thr.is_alive():
-            self.thr = threading.Thread(target=update_count).start()
