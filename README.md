@@ -1,7 +1,8 @@
 My personal playground/training arena
 ======================================
 
-[http://mitesh.ninja](http://mitesh.ninja)
+Index: [http://mitesh.ninja](http://mitesh.ninja)  
+Uploads: [http://mitesh.ninja/upload](http://mitesh.ninja/upload)
 
 ## Modules
 
@@ -38,7 +39,7 @@ Upload mutliple images, text, pdf files here: [mitesh.ninja/upload](http://mites
 To Do:
 
 * [ ] Add HTTPS support
-* [ ] Add authentication
+* [x] Add authentication
 * [ ] restrict uploads to 50 files/hr
 * [ ] restrict access using api tokens
 * [ ] make a command line script to auto upload
