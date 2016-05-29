@@ -15,12 +15,22 @@ ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 logging.basicConfig(level=logging.DEBUG)
 
 
+# Research if using class is the best method in this scenario?
+# I can import this class in other modules and get my uploads done
+# rather easily. So for the time being, this seems perfect.
 class UploadFileHandler:
     def __init__(self, files):
+        """
+        :param files: list of werkzeug FileStorage objects.
+        """
         self.files = files
         self.uploaded_list = []
 
+    # TODO: Fix this function. Too messy.
     def upload_all(self):
+        """
+        :return: list of urls of uploaded files.
+        """
         flag = False
         for file in self.files:
             if file:
