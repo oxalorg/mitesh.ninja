@@ -83,13 +83,16 @@ class UploadFileHandler:
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if request.method == 'POST':
-        files = request.files.getlist('file[]')
-        uploaded_files = UploadFileHandler(files).upload_all()
-        if len(uploaded_files) > 0:
-            return json.dumps({'files': uploaded_files,
-                               'count': len(uploaded_files)})
+        if request.form['password'] == app.config['NINJA_CLAN_SIGN']:
+            files = request.files.getlist('file[]')
+            uploaded_files = UploadFileHandler(files).upload_all()
+            if len(uploaded_files) > 0:
+                return json.dumps({'files': uploaded_files,
+                                   'count': len(uploaded_files)})
+            else:
+                return json.dumps({'success': 0})
         else:
-            return json.dumps({'success': 0})
+            return render_template('disgrace.html'), 401
     return render_template('upload.html')
 
 

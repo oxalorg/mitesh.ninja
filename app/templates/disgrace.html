@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block body %}
+<style>
+    h1,h2,h3{
+        font-family: 'NjNaruto';
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <h1>You are a disgrace to the ninja clan!</h1>
+        <br>
+        <h2>You must train harder!</h2>
+        <br>
+        <h3>Only then will you be able to perform our true ninja clan sign</h3>
+        <br>
+        <a href="{{ url_for('upload_file') }}">Go back and train.</a>
+    </div>
+</div>
+{% endblock %}
