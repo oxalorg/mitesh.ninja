@@ -1,7 +1,7 @@
 My personal playground/training arena
 ======================================
 
-Index: [http://mitesh.ninja](http://mitesh.ninja)  
+Index: [http://mitesh.ninja](http://mitesh.ninja)
 Uploads: [http://mitesh.ninja/upload](http://mitesh.ninja/upload)
 
 ## Modules
