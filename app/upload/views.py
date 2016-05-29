@@ -2,19 +2,13 @@ import json
 import os
 import random
 import string
-import fcntl
-import threading
 import logging
-from queue import Queue
 
-from flask import request, redirect, url_for, send_from_directory, send_file, render_template, flash, Blueprint
+from flask import request, url_for, send_from_directory, render_template, flash
 from werkzeug import secure_filename
 
-from app.upload import app
 from app.upload import models
-from app import db
-
-upload = Blueprint('upload', __name__)
+from app import db, app
 
 UPLOAD_FOLDER = app.config['UPLOAD_FOLDER']
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])

@@ -8,8 +8,5 @@ app.config.from_object('config')
 app.secret_key = app.config['SECRET_KEY']
 db = SQLAlchemy(app)
 
-from app import main
 import form
-from app import upload
-
-app.register_blueprint(upload.views.upload)
+from app import upload # Imports views from __init__.py in upload package
