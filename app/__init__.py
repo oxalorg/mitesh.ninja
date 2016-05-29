@@ -10,3 +10,4 @@ db = SQLAlchemy(app)
 
 # Imports views from __init__.py in respective packages
 from app import upload, form
+from app import main
