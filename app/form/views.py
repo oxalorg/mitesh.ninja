@@ -1,5 +1,8 @@
-from flask import Flask, request
-from form import app, mailNinja
+from flask import request
+from app import app
+
+from app.form import mailNinja
+
 
 @app.route('/api/sendForm/<string:query>/', methods=['POST'])
 def sendForm(query):

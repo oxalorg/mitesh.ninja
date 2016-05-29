@@ -1,6 +1,7 @@
-import hmac
 import requests
-from form import app
+
+from app import app
+
 
 def send_email(subject, sender, recipients, text_body, reply_to, message_id):
     """
