@@ -2,10 +2,10 @@
 
 basedir=`pwd`
 nginxdir=/etc/nginx/sites-available
-vassalsdir=/etc/uwsgi/vassals
+vassaldir=/etc/uwsgi/vassals
 
-sudo cp -v $basedir/mitesh.ninja.conf $nginxdir/mitesh.ninja.conf
-sudo cp -v $basedir/mitesh.ninja.uwsgi.ini $vassaldir/mitesh.ninja.uwsgi.conf
+sudo cp -iv $basedir/mitesh.ninja.conf $nginxdir/mitesh.ninja.conf
+sudo cp -iv $basedir/mitesh.ninja.uwsgi.ini $vassaldir/mitesh.ninja.uwsgi.conf
 
 # restart the uwsgi vassal process
 sudo touch $vassaldir/mitesh.ninja.uwsgi.conf
