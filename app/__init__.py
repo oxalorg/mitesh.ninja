@@ -9,4 +9,4 @@ app.secret_key = app.config['SECRET_KEY']
 db = SQLAlchemy(app)
 
 import form
-from app import upload # Imports views from __init__.py in upload package
+from app import upload  # Imports views from __init__.py in upload package

@@ -28,10 +28,12 @@ class UploadFileHandler:
                     file.filename)
                 if UploadFileHandler.allowed_file(file.filename):
                     file_path = os.path.join(app.config['UPLOAD_FOLDER'],
-                                           filename)
+                                             filename)
                     file.save(file_path)
                     file_size = os.stat(file_path).st_size
-                    file_details = models.FileDetails(secure_filename(file.filename), filename, file_size, file_path)
+                    file_details = models.FileDetails(
+                        secure_filename(file.filename), filename, file_size,
+                        file_path)
                     db.session.add(file_details)
                     self.uploaded_list.append(url_for('uploaded_file',
                                                       filename=filename,
@@ -74,7 +76,8 @@ def upload_file():
         files = request.files.getlist('file[]')
         uploaded_files = UploadFileHandler(files).upload_all()
         if len(uploaded_files) > 0:
-            return json.dumps({'files': uploaded_files, 'count': len(uploaded_files)})
+            return json.dumps({'files': uploaded_files,
+                               'count': len(uploaded_files)})
         else:
             return json.dumps({'success': 0})
     return render_template('upload.html')

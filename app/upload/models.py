@@ -1,6 +1,7 @@
 from app import db
 import datetime
 
+
 class FileDetails(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(120))
@@ -19,4 +20,6 @@ class FileDetails(db.Model):
         self.views = 0
 
     def __repr__(self):
-        return 'Details:\n{}\n{}\n{}\n{}\n{}\n{}\n'.format(self.filename, self.name, self.size, self.path, self.creation_time, self.views)
+        return 'Details:\n{}\n{}\n{}\n{}\n{}\n{}\n'.format(
+            self.filename, self.name, self.size, self.path, self.creation_time,
+            self.views)
