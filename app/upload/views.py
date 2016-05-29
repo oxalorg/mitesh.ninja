@@ -77,7 +77,7 @@ class UploadFileHandler:
     @staticmethod
     def allowed_file(filename):
         return '.' in filename and \
-               UploadFileHandler.get_file_extension(filename) in ALLOWED_EXTENSIONS
+               UploadFileHandler.get_file_extension(filename).lower() in ALLOWED_EXTENSIONS
 
 
 @app.route('/upload', methods=['GET', 'POST'])
