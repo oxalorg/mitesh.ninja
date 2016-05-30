@@ -1,57 +1,66 @@
 {% extends "layout.html" %}
-{% block body %}
+{% block script %}
 <script type="text/javascript">
-        function getFileData(myFile){
+    window.onload = function() {
+        function getFileData(myFile) {
             var files = myFile.files;
             var fTableBody = document.getElementById('fileTableBody');
-            for(let i = 0; i < files.length; i++){
+            for (let i = 0; i < files.length; i++) {
                 var filename = files[i].name;
-                var size = files[i].size/1000;
-                if(size > 1000.0){
-                    size = (size/1000).toFixed(2) + ' MB';
+                var size = files[i].size / 1000;
+                if (size > 1000.0) {
+                    size = (size / 1000).toFixed(2) + ' MB';
                 } else {
                     size = (size).toFixed(2) + ' KB';
                 }
-                fTableBody.innerHTML += '<tr><td>'+ filename +'</td><td>' + size +'</td></tr>';
+                fTableBody.innerHTML += '<tr><td>' + filename + '</td><td>' + size + '</td></tr>';
             }
         }
+
         var colors = ["#00F", "#0F0", "#F00", "#F0F"];
         var css = document.createElement("style");
         css.type = "text/css";
         var colorIndex = 0;
-        function changeColors(){
-            colorIndex = (colorIndex+1)%colors.length;
+
+        function changeColors() {
+            colorIndex = (colorIndex + 1) % colors.length;
             var nextColor = colors[colorIndex];
             css.innerHTML = "th,td{border-bottom-color:" + nextColor + ";}";
             css.innerHTML += "th{color:" + nextColor + ";}";
-            css.innerHTML += "#ninja-scroll-hd{color:"+nextColor+";}";
+            css.innerHTML += "#ninja-scroll-hd{color:" + nextColor + ";}";
             document.body.appendChild(css);
         }
+
         var currentNumber = 1;
-        function progressiveRandomNumber(){
-            if(currentNumber > 20000)
-                    currentNumber = 1;
-            currentNumber += currentNumber/(Math.sqrt(currentNumber)) + currentNumber/3;
+
+        function progressiveRandomNumber() {
+            if (currentNumber > 20000)
+                currentNumber = 1;
+            currentNumber += currentNumber / (Math.sqrt(currentNumber)) + currentNumber / 3;
             console.log(currentNumber);
             return currentNumber;
         }
-        (function randomizeChangeColor(){
+
+        (function randomizeChangeColor() {
             var randomTime = progressiveRandomNumber();
-            setTimeout( function() {
+            setTimeout(function () {
                 changeColors();
                 randomizeChangeColor();
             }, randomTime);
         }());
 
-        function toggleInfo(){
+        function toggleInfo() {
             var infoBox = document.getElementById('infoBox');
-            if(infoBox.style.display == 'none'){
+            if (infoBox.style.display == 'none') {
                 infoBox.style.display = 'block';
             } else {
                 infoBox.style.display = 'none';
             }
         }
+    }
 </script>
+{% endblock %}
+{% block style %}
 <style>
     input[type="file"] {
         display: none;
@@ -60,6 +69,8 @@
         cursor: pointer;
     }
 </style>
+{%- endblock -%}
+{% block body %}
 <div class="container">
     <div class="row">
         <h1 id="ninja-scroll-hd" class="text-center" style="font-family:NjNaruto">Ninja Scroll Delivery Service</h1>
