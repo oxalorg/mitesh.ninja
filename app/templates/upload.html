@@ -1,8 +1,17 @@
 {% extends "layout.html" %}
 {% block script %}
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
 <script type="text/javascript">
+    var isAdvancedUpload = function() {
+        var div = document.createElement('div');
+        return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+    }();
+    var getFileData;
     window.onload = function() {
-        function getFileData(myFile) {
+        if(!isAdvancedUpload){
+            $('#fileList').hide(1000);
+        }
+        getFileData = function (myFile) {
             var files = myFile.files;
             var fTableBody = document.getElementById('fileTableBody');
             for (let i = 0; i < files.length; i++) {
@@ -49,14 +58,9 @@
             }, randomTime);
         }());
 
-        function toggleInfo() {
-            var infoBox = document.getElementById('infoBox');
-            if (infoBox.style.display == 'none') {
-                infoBox.style.display = 'block';
-            } else {
-                infoBox.style.display = 'none';
-            }
-        }
+        $('#toggleInfo').click(function(){
+            $('#infoBox').toggle('slow');
+        });
     }
 </script>
 {% endblock %}
@@ -78,7 +82,7 @@
     <div class="row .text-center">
 {#        <img src="{{ url_for('static', filename='img/shuriken.png') }}" alt="shuriken-px-art">#}
     </div>
-    <form action="" method=post enctype=multipart/form-data>
+    <form action="{{ url_for('upload_file') }}" method="post">
         <div class="row">
             <label style="font-family:NjNaruto">Ninja clan sign</label>
         </div>
@@ -97,7 +101,7 @@
                 <input class="button-primary u-full-width" type=submit style="margin-bottom:10px"; value=Upload>
             </div>
             <div class="four columns">
-                <input class="button-primary u-full-width" type=button value="info" style="margin-bottom:10px"; onclick="toggleInfo();event.preventDefault();">
+                <input class="button-primary u-full-width" type=button value="info" style="margin-bottom:10px"; id="toggleInfo">
             </div>
         </div>
         <div class="row" id="infoBox" style="display:none">
