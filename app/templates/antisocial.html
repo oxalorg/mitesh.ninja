@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block style %}
+<style media="screen">
+    .post{
+        border: 1px solid #445466;
+        margin: 20px 0px;
+        padding: 15px;
+    }
+    img{
+        max-width: 100%;
+        /*max-height: 500px;*/
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1 style="font-family:NjNaruto">Antisocial Ninja</h1>
+        <h5>10 most recent messages:<h5>
+    </div>
+    {% for post in posts %}
+        <div class="row post">
+            {{ post.body | safe }}
+            {% for file in post.files %}
+                    <a href="{{ file.url }}"><img src="{{ file.url }}" alt="" /></a>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <hr style="border-color:#342">
+    <div class="row">
+        <p>
+            </em>What is this?</em>
+        </p>
+        <p>
+            <em>It's a small antisocial place for me to post updates/thoughts/pictures and everything random. I like this because it's more personal (I don't advertise this other than close friends and family), I own the data I post here and mostly importantly it only shows 10 most recent posts.</em>
+        </p>
+    </div>
+</div>
+{% endblock %}

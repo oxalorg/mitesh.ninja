@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block style %}
+<style media="screen">
+    .post{
+        border: 1px solid #445466;
+        margin: 20px 0px;
+        padding: 5px;
+    }
+    input[type="file"] {
+        display: none;
+    }
+    .custom-file-upload {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1 style="font-family:NjNaruto">Antisocial Ninja - POST </h1>
+    </div>
+    <p>
+        Go back to <a href="{{ url_for('antisocial') }}">antisocial</a>.
+    </p>
+    <form class="" action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <textarea style="height:250px" name="body" class="u-full-width" placeholder="Secret message here." required></textarea>
+        </div>
+        <br>
+        <div class="row">
+            <div class="four columns">
+                <input class="u-full-width" type="password" name="password" value="" placeholder="***********">
+            </div>
+            <div class="four columns">
+                <label class="button button-primary u-full-width">
+                    <input type="file" id="fileInput" name="file[]" multiple>
+                     Add files
+                </label>
+            </div>
+            <div class="four columns">
+                <input class="u-full-width button button-primary" type="submit" name="submit" value="Submit">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}
