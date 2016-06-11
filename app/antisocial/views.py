@@ -24,8 +24,6 @@ def test():
 @app.route('/antisocial', methods=['GET'])
 def antisocial():
     posts = Post.query.order_by(Post.creation_time.desc()).limit(10).all()
-    for p in posts:
-        print(p.body)
     return render_template('antisocial.html', posts=posts)
 
 
