@@ -5,3 +5,4 @@ config.py
 count_file.txt
 test.db
 app/static/user_uploads
+venv/
