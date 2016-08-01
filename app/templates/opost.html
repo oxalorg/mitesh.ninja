@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+{% block style %}
+<style media="screen">
+    .post{
+        border: 1px solid #445466;
+        margin: 20px 0px;
+        padding: 5px;
+    }
+    input[type="file"] {
+        display: none;
+    }
+    .custom-file-upload {
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <h1 style="font-family:NjNaruto">/o/ \o/ \o\ o7 Ninja Blog</h1>
+    </div>
+    <p>
+        Go back to <a href="{{ url_for('index') }}">ninja base</a>.
+    </p>
+    <form class="" action="" method="post" enctype="multipart/form-data">
+        <div class="row">
+            <textarea style="height:550px" name="body" class="u-full-width" placeholder="Secret message here." required></textarea>
+        </div>
+        <br>
+        <div class="row">
+            <div class="six columns">
+                <input class="u-full-width" type="password" name="password" value="" placeholder="***********">
+            </div>
+            <div class="six columns">
+                <input class="u-full-width button button-primary" type="submit" name="submit" value="Submit">
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="six columns">
+                <input class="u-full-width" type="text" name="path" value="" placeholder="blog/your-post-slug">
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

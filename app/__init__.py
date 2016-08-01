@@ -12,6 +12,6 @@ db = SQLAlchemy(app)
 basic_auth = BasicAuth(app)
 
 # Imports views from __init__.py in respective packages
-from app import upload, form, antisocial
+from app import upload, form, antisocial, post
 from app import main
 from app import admin
