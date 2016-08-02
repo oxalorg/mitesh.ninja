@@ -6,7 +6,7 @@ from dystic import builder
 ROOT = os.path.expanduser(app.config['OROOT'])
 
 
-@app.route('/o/post', methods=["GET", "POST"])
+@app.route('/post', methods=["GET", "POST"])
 def opost():
     if request.method == 'POST':
         if request.form['password'] == app.config['NINJA_CLAN_SIGN']:
