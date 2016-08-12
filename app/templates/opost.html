@@ -1,4 +1,65 @@
 {% extends "layout.html" %}
+{% block script %}
+<script   src="https://code.jquery.com/jquery-2.2.4.min.js"   integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="   crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var isAdvancedUpload = function() {
+        var div = document.createElement('div');
+        return (('draggable' in div) || ('ondragstart' in div && 'ondrop' in div)) && 'FormData' in window && 'FileReader' in window;
+    }();
+    var getFileData;
+    window.onload = function() {
+        if(!isAdvancedUpload){
+            $('#fileList').hide(1000);
+        }
+        getFileData = function (myFile) {
+            var files = myFile.files;
+            var fTableBody = document.getElementById('fileTableBody');
+            for (let i = 0; i < files.length; i++) {
+                var filename = files[i].name;
+                var size = files[i].size / 1000;
+                if (size > 1000.0) {
+                    size = (size / 1000).toFixed(2) + ' MB';
+                } else {
+                    size = (size).toFixed(2) + ' KB';
+                }
+                fTableBody.innerHTML += '<tr><td>' + filename + '</td><td>' + size + '</td></tr>';
+            }
+        }
+
+        var colors = ["#00F", "#0F0", "#F00", "#F0F"];
+        var css = document.createElement("style");
+        css.type = "text/css";
+        var colorIndex = 0;
+
+        function changeColors() {
+            colorIndex = (colorIndex + 1) % colors.length;
+            var nextColor = colors[colorIndex];
+            css.innerHTML = "th,td{border-bottom-color:" + nextColor + ";}";
+            css.innerHTML += "th{color:" + nextColor + ";}";
+            css.innerHTML += "#ninja-scroll-hd{color:" + nextColor + ";}";
+            document.body.appendChild(css);
+        }
+
+        var currentNumber = 1;
+
+        function progressiveRandomNumber() {
+            if (currentNumber > 20000)
+                currentNumber = 1;
+            currentNumber += currentNumber / (Math.sqrt(currentNumber)) + currentNumber / 3;
+            console.log(currentNumber);
+            return currentNumber;
+        }
+
+        (function randomizeChangeColor() {
+            var randomTime = progressiveRandomNumber();
+            setTimeout(function () {
+                changeColors();
+                randomizeChangeColor();
+            }, randomTime);
+        }());
+    }
+</script>
+{% endblock %}
 {% block style %}
 <style media="screen">
     .post{
@@ -40,7 +101,29 @@
             <div class="six columns">
                 <input class="u-full-width" type="text" name="path" value="" placeholder="blog/your-post-slug">
             </div>
+            <div class="six columns">
+                <label class="custom-file-upload button button-primary u-full-width">
+                    <input type="file" id="fileInput" name="file[]" onchange="getFileData(this);" multiple>
+                     Add files
+                </label>
+            </div>
+
         </div>
     </form>
+    <div class="row">
+        <ul id="fileList">
+            <table id="fileTable" class="u-full-width">
+                <thead>
+                    <tr>
+                        <th>File Name</th>
+                        <th>Size</th>
+                    </tr>
+                </thead>
+                <tbody id="fileTableBody">
+
+                </tbody>
+            </table>
+        </ul>
+    </div>
 </div>
 {% endblock %}
