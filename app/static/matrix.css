@@ -39,3 +39,16 @@ canvas {
      -4px 4px 2px #000,
       4px 4px 2px #000;  
 }
+
+#terminal {
+    background-color: black;
+    overflow-y: auto;
+    color: #eee;
+    border: 2px solid cyan;
+    position: absolute;
+    top: 30%;
+    margin: auto;
+    left: 10%;
+    width: 80%;
+    height: 40%;
+}

@@ -17,11 +17,15 @@ var drops = [];
 for(var x = 0; x < columns; x++)
     drops[x] = c.height + 10; 
 
-var colors = ["#0FF", "#00F", "#0F0", "#F00", "#FF0", "#F0F"];
-var currentColor = "#0FF"; // Default Color value
+var colors = ["#00F", "#0F0", "#F00", "#FF0", "#F0F"];
+var currentColor = "#00F"; // Default Color value
 
-var drawTime = 60;
-var drawTimeValues = [15, 60, 999999];
+var drawTime = 50;
+var drawTimeValues = [40, 60, 80];
+
+var terminal = document.getElementById("terminal");
+terminal.style["border-color"] = currentColor;
+terminal.style.color = currentColor;
 function draw()
 {
     ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
@@ -50,6 +54,9 @@ function randomize_matrix()
     while(currentColor == tempColor){
         currentColor = colors[Math.floor(Math.random()*colors.length)];
     }
+    terminal.style["border-color"] = currentColor;
+    terminal.style.color = currentColor;
+
     var tempTime = drawTime;
     while(drawTime == tempTime){
         drawTime = drawTimeValues[Math.floor(Math.random()*drawTimeValues.length)];
